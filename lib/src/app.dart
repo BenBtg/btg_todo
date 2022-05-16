@@ -15,15 +15,8 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settingsController = ref.watch(settingControllerProvider);
-    // Glue the SettingsController to the MaterialApp.
-    //
-    // The AnimatedBuilder Widget listens to the SettingsController for changes.
-    // Whenever the user updates their settings, the MaterialApp is rebuilt.
+
     return MaterialApp(
-      // Providing a restorationScopeId allows the Navigator built by the
-      // MaterialApp to restore the navigation stack when a user leaves and
-      // returns to the app after it has been killed while running in the
-      // background.
       restorationScopeId: 'app',
 
       // Provide the generated AppLocalizations to the MaterialApp. This

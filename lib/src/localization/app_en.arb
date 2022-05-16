@@ -1,6 +1,6 @@
 {
-  "appTitle": "btg_todo",
+  "appTitle": "Btg Todo",
   "@appTitle": {
-    "description": "The title of the application"
+    "description": "Simple Todo app for learning Flutter and Riverpod"
   }
 }
