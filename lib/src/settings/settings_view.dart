@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'settings_controller.dart';
 
@@ -6,15 +7,14 @@ import 'settings_controller.dart';
 ///
 /// When a user changes a setting, the SettingsController is updated and
 /// Widgets that listen to the SettingsController are rebuilt.
-class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key, required this.controller}) : super(key: key);
+class SettingsView extends ConsumerWidget {
+  const SettingsView({Key? key}) : super(key: key);
 
   static const routeName = '/settings';
 
-  final SettingsController controller;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settingsController = ref.watch(settingControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -27,9 +27,10 @@ class SettingsView extends StatelessWidget {
         // SettingsController is updated, which rebuilds the MaterialApp.
         child: DropdownButton<ThemeMode>(
           // Read the selected themeMode from the controller
-          value: controller.themeMode,
+          value: settingsController,
           // Call the updateThemeMode method any time the user selects a theme.
-          onChanged: controller.updateThemeMode,
+          onChanged:
+              ref.read(settingControllerProvider.notifier).updateThemeMode,
           items: const [
             DropdownMenuItem(
               value: ThemeMode.system,
